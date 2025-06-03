@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Accesible</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+            margin: 20px;
+        }
+        h1, h2 {
+            color: #0056b3;
+        }
+        .button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+        .accessible-text {
+            margin: 20px 0;
+            font-size: 18px;
+        }
+        .word {
+            display: inline-block;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Bienvenido a Nuestra Página Accesible</h1>
+    <h2>Texto que Puedes Escuchar</h2>
+    <p class="accessible-text" id="text">
+        <span class="word">Este</span> 
+        <span class="word">es</span> 
+        <span class="word">un</span> 
+        <span class="word">ejemplo</span> 
+        <span class="word">de</span> 
+        <span class="word">texto</span> 
+        <span class="word">que</span> 
+        <span class="word">se</span> 
+        <span class="word">puede</span> 
+        <span class="word">leer</span> 
+        <span class="word">en</span> 
+        <span class="word">voz</span> 
+        <span class="word">alta.</span> 
+        <span class="word">Puedes</span> 
+        <span class="word">hacer</span> 
+        <span class="word">clic</span> 
+        <span class="word">en</span> 
+        <span class="word">el</span> 
+        <span class="word">botón</span> 
+        <span class="word">a</span> 
+        <span class="word">continuación</span> 
+        <span class="word">para</span> 
+        <span class="word">escuchar</span> 
+        <span class="word">el</span> 
+        <span class="word">contenido.</span>
+    </p>
+    
+    <button class="button" onclick="speakText()">Escuchar Texto Completo</button>
+
+    <script>
+        // Función para leer el texto completo
+        function speakText() {
+            var text = document.getElementById("text").innerText;
+            var utterance = new SpeechSynthesisUtterance(text);
+            speechSynthesis.speak(utterance);
+        }
+
+        // Función para leer la palabra cuando se pasa el cursor
+        const words = document.querySelectorAll('.word');
+        words.forEach(word => {
+            word.addEventListener('mouseover', () => {
+                const utterance = new SpeechSynthesisUtterance(word.innerText);
+                speechSynthesis.speak(utterance);
+            });
+        });
+    </script>
+
+</body>
+</html>
